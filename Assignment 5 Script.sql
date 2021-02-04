@@ -9,10 +9,10 @@ AS
 RETURN
 ( 
 SELECT 
-  report_categories.user_id,
+  /*report_categories.user_id,*/
   report_categories.first_name,
   report_categories.last_name,
-  report_categories.role_id,
+  /*report_categories.role_id,*/
   report_categories.role_name,
   report_categories.role_description
 FROM
@@ -36,7 +36,7 @@ SELECT * FROM getUserRolesReport()
 
 /*******************************Query 2*******************************/
 
-IF OBJECT_ID (N'dbo.getGuestCount', N'FN') IS NOT NULL  
+/*IF OBJECT_ID (N'dbo.getGuestCount', N'FN') IS NOT NULL  
     DROP FUNCTION getGuestCount;  
 GO  
 CREATE FUNCTION dbo.getGuestCount(@class_id int)  
@@ -51,8 +51,10 @@ BEGIN
 END;
 
 
-SELECT DISTINCT Class.Name AS ClassName, dbo.getGuestCount(Class.ID) AS GuestCount FROM Class JOIN GuestClass ON Class.ID=GuestClass.ClassID;
+SELECT DISTINCT Class.Name AS ClassName, dbo.getGuestCount(Class.ID) AS GuestCount FROM Class JOIN GuestClass ON Class.ID=GuestClass.ClassID;*/
 
+SELECT DISTINCT Class.Name AS ClassName, Count(*) AS GuestCount FROM Class JOIN GuestClass ON Class.ID=GuestClass.ClassID
+GROUP BY Class.Name;
 
 /*******************************Query 3*******************************/
 
@@ -114,11 +116,11 @@ AS
 RETURN
 ( 
 SELECT 
-  report_RoomsAvailable.room_id,
+  /*report_RoomsAvailable.room_id,*/
   report_RoomsAvailable.room_name,
-  report_RoomsAvailable.room_status_id,
+  /*report_RoomsAvailable.room_status_id,*/
   report_RoomsAvailable.room_status,
-  report_RoomsAvailable.tavern_id,
+ /* report_RoomsAvailable.tavern_id,*/
   report_RoomsAvailable.tavern_name
 FROM
 (
